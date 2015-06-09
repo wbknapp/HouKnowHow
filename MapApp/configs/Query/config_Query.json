@@ -1,0 +1,71 @@
+{
+  "queries": [
+    {
+      "name": "PD_Census_Block_Group_Demographics_wm - Median Household Income by Census Block Group (2010)",
+      "url": "http://mycity.houstontx.gov/arcgis1022/rest/services/PD/PD_Census_Block_Group_Demographics_wm/MapServer/5",
+      "filter": {
+        "logicalOperator": "AND",
+        "parts": [
+          {
+            "fieldObj": {
+              "name": "COUNTY",
+              "label": "COUNTY",
+              "shortType": "string",
+              "type": "esriFieldTypeString"
+            },
+            "operator": "stringOperatorIs",
+            "valueObj": {
+              "isValid": true,
+              "type": "value",
+              "value": "Harris"
+            },
+            "interactiveObj": {
+              "prompt": "Harris",
+              "hint": "Harris"
+            },
+            "caseSensitive": false,
+            "expr": "COUNTY = 'Harris'"
+          }
+        ],
+        "expr": "COUNTY = 'Harris'"
+      },
+      "popup": {
+        "title": "${STATE}",
+        "fields": [
+          {
+            "name": "STATE",
+            "type": "esriFieldTypeString",
+            "alias": "STATE",
+            "length": 254,
+            "domain": null,
+            "specialType": "none",
+            "visibility": false,
+            "showInInfoWindow": false
+          }
+        ]
+      },
+      "resultsSymbol": {
+        "color": [
+          155,
+          187,
+          89,
+          128
+        ],
+        "outline": {
+          "color": [
+            115,
+            140,
+            61,
+            255
+          ],
+          "width": 1.5,
+          "type": "esriSLS",
+          "style": "esriSLSSolid"
+        },
+        "type": "esriSFS",
+        "style": "esriSFSSolid"
+      },
+      "objectIdField": "OBJECTID_1"
+    }
+  ]
+}

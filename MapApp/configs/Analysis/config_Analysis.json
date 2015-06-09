@@ -1,0 +1,19 @@
+{
+  "analysisTools": [
+    {
+      "name": "CalculateDensity"
+    },
+    {
+      "name": "CreateBuffers"
+    },
+    {
+      "name": "FindHotSpots"
+    },
+    {
+      "name": "FindNearest"
+    },
+    {
+      "name": "SummarizeNearby"
+    }
+  ]
+}

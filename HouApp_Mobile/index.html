@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>HouApp</title>
+
+    <!-- HouAppMobile references -->
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="Content/ionic.css" rel="stylesheet" />
+</head>
+<body ng-controller="HomeController">
+    <!--<header>
+        
+        <div class="bar bar-header bar-positive">
+            <button class="button icon ion-navicon" ng-click="menu()"></button>
+            <h5 class="title">HouKnowHow</h5>
+        </div>
+    </header>-->
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-nav-view></ion-nav-view>
+
+
+    <script id="templates/tabs.html" type="text/ng-template">
+        <ion-tabs class="tabs-icon-top tabs-positive">
+
+            <ion-tab title="Home" icon="ion-home" href="#/tab/home">
+                <ion-nav-view name="home-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="About" icon="ion-ios-information" href="#/tab/about">
+                <ion-nav-view name="about-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Contact" icon="ion-ios-world" ui-sref="tabs.contact">
+                <ion-nav-view name="contact-tab"></ion-nav-view>
+            </ion-tab>
+
+        </ion-tabs>
+    </script>
+
+    <script id="templates/home.html" type="text/ng-template">
+        <ion-view view-title="Settings">
+            <ion-content class="padding">
+                <p>
+                    <a class="button icon icon-right ion-chevron-right" href="#/tab/map">To Map</a>
+                </p>
+                <ul class="list">
+
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="income" ng-change="checkBox('income')">
+                        </label>
+                        Property Values
+                    </li>
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="flood" ng-change="checkBox('flood')">
+                        </label>
+                        Flood plains
+                    </li>
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="art" ng-change="checkBox('art')">
+                        </label>
+                        Civic/Urban Art
+                    </li>
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="safety" ng-change="checkBox('safety')">
+                        </label>
+                        Public Safety
+                    </li>
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="health" ng-change="checkBox('health')">
+                        </label>
+                        Health Care
+                    </li>
+                    <li class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="food" ng-change="checkBox('food')">
+                        </label>
+                        Hunger Mitigation
+                    </li>
+                </ul>
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script id="templates/map.html" type="text/ng-template">
+        <ion-view view-title="Map">
+            <ion-content class="padding">
+                <div id="map_canvas">
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+                        <ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id"></ui-gmap-marker>
+                        <ui-gmap-marker ng-repeat="obj in markers" coords="obj.coords" options="obj.options" idkey="obj.id">
+                            <ui-gmap-window options="windowOptions" closeclick="closeClick()">
+                                <img src="/images/park.jpg"/>
+                            </ui-gmap-window>
+                        </ui-gmap-marker>
+                        
+                        <!--<ui-gmap-markers models="markers" coords="'self'">
+                        </ui-gmap-markers>-->
+                    </ui-gmap-google-map>
+                </div>
+                <p>
+                    <a class="button icon ion-home" href="#/tab/home"> Home</a>
+                    <a class="button icon icon-right ion-chevron-right" href="#/tab/camera">Take photo</a>
+                </p>
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script id="templates/camera.html" type="text/ng-template">
+        <ion-view view-title="Camera">
+            <ion-content class="padding">
+                <p>Photo feed goes here</p>
+                <button ng-click="takePicture()" class="button button-block button-primary">Take Photo</button>
+                <img ng-show="imgURI != undefined" ng-src="{{imgURI}}">
+                <img ng-show="imgURI == undefined" ng-src="http://placehold.it/300x300">
+                <p>
+                    <a class="button icon ion-home" href="#/tab/home"> Home</a>
+                    <a class="button icon ion-chevron-left" href="#/tab/map"> Back to map</a>
+                </p>
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script id="templates/about.html" type="text/ng-template">
+        <ion-view view-title="About">
+            <ion-content class="padding">
+                <h3>Stuff about the app can go in here.</h3>
+                <p>Like, you know, how to use it or about the team or whatever.</p>
+                <br />
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script id="templates/contact.html" type="text/ng-template">
+        <ion-view title="Contact">
+            <ion-content>
+                <div class="list">
+                    <div class="item">
+                        Someone
+                    </div>
+                    <div class="item">
+                        Someone else
+                    </div>
+                </div>
+            </ion-content>
+        </ion-view>
+    </script>
+    <script src="scripts/ionic.bundle.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script src="scripts/lodash.js"></script>
+    <script src="scripts/angular-google-maps.min.js"></script>
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="scripts/platformOverrides.js"></script>
+
+    <script src="scripts/index.js"></script>
+    <script src="scripts/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+    <script src="app.js"></script>
+    <script src="app/AppService.js"></script>
+    <script src="app/HomeController.js"></script>
+    <script src="app/PhotoController.js"></script>
+</body>
+</html>
